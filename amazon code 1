@@ -1,0 +1,92 @@
+ /* the code have to show only the trending products from amazon */
+var trendingProducts = document.getElementsByClassName('zg_itemImmersion');
+for (var i = 0; i < trendingProducts.length; i++) {
+  document.body.appendChild(trendingProducts[i]);
+}
+/* an only aded in the last 15 day */
+var trendingProducts = document.getElementsByClassName('zg_itemImmersion');
+for (var i = 0; i < trendingProducts.length; i++) {
+  var date = trendingProducts[i].getElementsByClassName('zg_releaseDate')[0].innerHTML;
+  var date = date.split(' ');
+  var date = date[1].split('/');
+  var date = new Date(date[2], date[0], date[1]);
+  var today = new Date();
+  var diff = Math.floor((today - date) / (1000 * 60 * 60 * 24));
+  if (diff < 15) {
+    document.body.appendChild(trendingProducts[i]);
+  }
+}
+/* add the main keyword to every product */
+var trendingProducts = document.getElementsByClassName('zg_itemImmersion');
+for (var i = 0; i < trendingProducts.length; i++) {
+  var keyword = trendingProducts[i].getElementsByClassName('zg_title')[0].innerHTML;
+  var keyword = keyword.split(' ');
+  var keyword = keyword[0];
+  trendingProducts[i].getElementsByClassName('zg_title')[0].innerHTML = keyword + ' ' + trendingProducts[i].getElementsByClassName('zg_title')[0].innerHTML;
+}
+/* this products must have more than 250 sales */
+var trendingProducts = document.getElementsByClassName('zg_itemImmersion');
+for (var i = 0; i < trendingProducts.length; i++) {
+  var keyword = trendingProducts[i].getElementsByClassName('zg_title')[0].innerHTML;
+  var keyword = keyword.split(' ');
+  var keyword = keyword[0];
+  var url = 'https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=' + keyword;
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url, false);
+  xhr.send();
+  var response = xhr.responseText;
+  var response = response.split('<span class="s-item-container">');
+  var response = response[1].split('</span>');
+  var response = response[0].split('<span class="a-color-secondary">');
+  var response = response[1].split('</span>');
+  var response = response[0].split(' ');
+  var response = response[0].split(',');
+  var response = response.join('');
+  if (response > 250) {
+    document.body.appendChild(trendingProducts[i]);
+  }
+}
+/* the products must have more than 100 reviews */
+var trendingProducts = document.getElementsByClassName('zg_itemImmersion');
+for (var i = 0; i < trendingProducts.length; i++) {
+  var keyword = trendingProducts[i].getElementsByClassName('zg_title')[0].innerHTML;
+  var keyword = keyword.split(' ');
+  var keyword = keyword[0];
+  var url = 'https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=' + keyword;
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url, false);
+  xhr.send();
+  var response = xhr.responseText;
+  var response = response.split('<span class="s-item-container">');
+  var response = response[1].split('</span>');
+  var response = response[0].split('<span class="a-color-secondary">');
+  var response = response[1].split('</span>');
+  var response = response[0].split(' ');
+  var response = response[0].split(',');
+  var response = response.join('');
+  if (response > 100) {
+    document.body.appendChild(trendingProducts[i]);
+  }
+}
+/* that products must have more than 100 researches */
+var trendingProducts = document.getElementsByClassName('zg_itemImmersion');
+for (var i = 0; i < trendingProducts.length; i++) {
+  var keyword = trendingProducts[i].getElementsByClassName('zg_title')[0].innerHTML;
+  var keyword = keyword.split(' ');
+  var keyword = keyword[0];
+  var url = 'https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=' + keyword;
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url, false);
+  xhr.send();
+  var response = xhr.responseText;
+  var response = response.split('<span class="s-item-container">');
+  var response = response[1].split('</span>');
+  var response = response[0].split('<span class="a-color-secondary">');
+  var response = response[1].split('</span>');
+  var response = response[0].split(' ');
+  var response = response[0].split(',');
+  var response = response.join('');
+  if (response > 100) {
+    document.body.appendChild(trendingProducts[i]);
+  }
+}
